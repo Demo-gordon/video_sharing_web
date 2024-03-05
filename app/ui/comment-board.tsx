@@ -14,6 +14,7 @@ export default function CommentBoard({commentList, videoId, user}:any){
     const router = useRouter();
    
     const {
+        reset,
         register,
         handleSubmit,
         formState: { errors },
@@ -23,6 +24,7 @@ export default function CommentBoard({commentList, videoId, user}:any){
     const onSubmit: SubmitHandler<any> = async (data) =>{
        const result = await createComment(data, videoId)
        if (result.success){
+           reset()
            router.refresh()
        }
        else {
