@@ -21,8 +21,13 @@ export default function CommentBoard({commentList, videoId, user}:any){
 
       // submit form
     const onSubmit: SubmitHandler<any> = async (data) =>{
-        createComment(data, videoId)
-        router.refresh()
+       const result = await createComment(data, videoId)
+       if (result.success){
+           router.refresh()
+       }
+       else {
+           alert(result.message)
+       }
     }
 
    async function handleDelete(id: string){
